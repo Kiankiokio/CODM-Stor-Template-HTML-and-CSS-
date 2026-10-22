@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#4f46e5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="برنامه‌ریز">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>برنامه‌ریز درسی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f6fb;--card:#fff;--text:#1d2135;--muted:#6b7285;--primary:#4f46e5;--primary-soft:#eceeff;--ok:#16a34a;--warn:#f59e0b;--bad:#ef4444;--border:#e6e8f2;--r:18px;--shadow:0 1px 2px rgba(20,24,60,.05),0 8px 24px rgba(20,24,60,.06)}
+[data-theme=dark]{--bg:#0e111f;--card:#171b2f;--text:#e8eaf6;--muted:#9299b5;--primary:#8b93ff;--primary-soft:#232849;--border:#262b47;--shadow:none}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Vazirmatn',Tahoma,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:15px;padding-bottom:90px}
+h1,h2,h3{margin:0 0 8px;line-height:1.5}h2{font-size:18px}h3{font-size:16px}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:14px}
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:8px;padding:10px 14px;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.top .brand{display:flex;align-items:center;gap:10px;min-width:0}
+.top .brand b{display:block;line-height:1.3}.top .brand small{color:var(--muted);font-size:12px}
+.logo{width:38px;height:38px;border-radius:12px;background:var(--primary-soft);display:grid;place-items:center;font-size:22px;overflow:hidden;flex:none}
+.logo img{width:100%;height:100%;object-fit:cover}
+.sp{flex:1}
+.ic{width:40px;height:40px;border:1px solid var(--border);background:var(--card);border-radius:12px;cursor:pointer;font-size:18px;display:grid;place-items:center}
+.card{background:var(--card);border-radius:var(--r);padding:16px;margin-bottom:14px;box-shadow:var(--shadow);border:1px solid var(--border)}
+.hero{background:linear-gradient(135deg,#4f46e5,#7c3aed 70%,#a855f7);color:#fff;border:0}
+.hero small{opacity:.85}.hero .q{font-size:17px;font-weight:500;margin-top:10px;line-height:2}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}.grow{flex:1;min-width:0}
+.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.btn{border:0;background:var(--primary);color:#fff;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:500}
+.btn.sm{padding:6px 12px;font-size:13px;border-radius:10px}
+.btn.ghost{background:var(--primary-soft);color:var(--primary)}
+.btn.danger{background:#fee2e2;color:#b91c1c}
+.btn.light{background:rgba(255,255,255,.2);color:#fff}
+.btn:active{transform:scale(.98)}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
+input,select,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:var(--bg);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--primary)}
+input[type=checkbox],input[type=radio]{width:auto}
+input[type=range]{padding:0}
+.jp{display:grid;grid-template-columns:70px 1fr 90px;gap:6px}
+.chip{display:inline-block;padding:1px 10px;border-radius:99px;font-size:12px;font-weight:500;background:color-mix(in srgb,var(--c,#888) 16%,transparent);color:var(--c,#888)}
+.mini{font-style:normal;font-size:11px;padding:0 7px;border-radius:99px;background:color-mix(in srgb,var(--c,#888) 16%,transparent);color:var(--c,#888);margin-right:6px}
+.badge{font-size:11px;padding:1px 8px;border-radius:99px;background:var(--primary-soft);color:var(--primary)}
+.task{display:flex;align-items:center;gap:10px;padding:8px 4px;border-bottom:1px dashed var(--border)}
+.task:last-child{border:0}.task.done span.grow{text-decoration:line-through;color:var(--muted)}
+.task input{width:20px;height:20px;accent-color:var(--primary)}
+.x{border:0;background:none;color:var(--muted);cursor:pointer;font-size:14px}
+.add{display:flex;gap:6px;margin-top:10px}.add input{flex:1}.add select{width:120px}
+.slot{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;margin-bottom:8px;background:color-mix(in srgb,var(--c) 10%,var(--card));border:1px solid color-mix(in srgb,var(--c) 30%,transparent);border-right:5px solid var(--c);cursor:pointer}
+.slot.now{box-shadow:0 0 0 2px var(--c)}.slot.done{opacity:.55}
+.slot .time{font-size:12px;color:var(--muted);min-width:78px}.slot small{display:block;color:var(--muted)}
+.tick{width:26px;height:26px;border-radius:50%;border:2px solid var(--c);display:grid;place-items:center;color:#fff;background:transparent;font-size:14px}
+.slot.done .tick{background:var(--c)}
+.scroll{overflow-x:auto;margin:0 -4px;padding:0 4px}
+table.plan{border-collapse:separate;border-spacing:4px;min-width:820px;width:100%}
+table.plan th{font-size:12px;color:var(--muted);font-weight:600;padding:6px 4px;white-space:nowrap}
+table.plan th.today{color:var(--primary)}
+table.plan th.rh{position:sticky;right:0;background:var(--card);z-index:2;font-weight:600;font-size:13px;color:var(--text);min-width:64px}table.plan th.ch{cursor:pointer;background:var(--primary-soft);border-radius:10px;color:var(--text);font-size:11px;line-height:1.5;min-width:76px}
+table.plan td{background:var(--bg);border-radius:10px;height:58px;min-width:76px;text-align:center;vertical-align:middle;cursor:pointer;padding:3px}
+table.plan td.today{outline:2px solid var(--primary-soft)}
+.cell{border-radius:9px;padding:6px 2px;font-size:12px;font-weight:600;color:#fff;background:var(--c);line-height:1.5}
+.plus{color:var(--muted);font-size:18px}
+.stat{padding:14px;border-radius:16px;background:var(--primary-soft);text-align:center}
+.stat b{display:block;font-size:19px;color:var(--primary)}.stat span{font-size:12px;color:var(--muted)}
+.bars{display:flex;align-items:flex-end;gap:4px;height:130px;margin-top:10px}
+.bars div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;font-size:10px;color:var(--muted)}
+.bars i{display:block;width:100%;border-radius:6px 6px 2px 2px;background:var(--primary);min-height:2px;opacity:.85}
+.bars i.ok{background:var(--ok)}
+.hb{margin:8px 0}.hb .l{display:flex;justify-content:space-between;font-size:13px;margin-bottom:2px}
+.hb .t{height:9px;border-radius:9px;background:var(--bg);overflow:hidden;position:relative}.hb .t i{display:block;height:100%;border-radius:9px;background:var(--c,var(--primary))}
+.hb .t u{position:absolute;top:0;bottom:0;width:2px;background:var(--text);opacity:.5}
+.tabs{display:flex;gap:6px;background:var(--bg);padding:4px;border-radius:14px;margin-bottom:12px}
+.tabs button{flex:1;border:0;background:none;padding:8px;border-radius:10px;cursor:pointer;color:var(--muted)}
+.tabs button.on{background:var(--card);color:var(--primary);font-weight:700;box-shadow:var(--shadow)}
+.drawer{position:fixed;top:0;bottom:0;right:0;width:290px;max-width:86vw;background:var(--card);transform:translateX(105%);transition:.28s;z-index:60;padding:16px 12px;overflow:auto;border-left:1px solid var(--border)}
+.drawer.open{transform:none;box-shadow:-10px 0 40px rgba(0,0,0,.2)}
+.ov{position:fixed;inset:0;background:rgba(10,12,30,.5);opacity:0;pointer-events:none;transition:.25s;z-index:50}.ov.open{opacity:1;pointer-events:auto}
+.nav{display:flex;align-items:center;gap:12px;width:100%;padding:12px;border:0;background:none;border-radius:14px;cursor:pointer;text-align:right;font-size:15px}
+.nav.on{background:var(--primary-soft);color:var(--primary);font-weight:700}.nav span:first-child{font-size:20px;width:26px;text-align:center}
+.fab{position:fixed;left:16px;bottom:18px;z-index:20;width:56px;height:56px;border-radius:50%;border:0;background:var(--primary);color:#fff;font-size:24px;box-shadow:0 8px 24px rgba(79,70,229,.45);cursor:pointer}
+.modal-ov{position:fixed;inset:0;z-index:80;background:rgba(10,12,30,.55);display:flex;align-items:flex-end;justify-content:center}
+.modal{background:var(--card);width:100%;max-width:520px;border-radius:24px 24px 0 0;padding:18px;max-height:92vh;overflow:auto;animation:up .25s}
+@media(min-width:640px){.modal-ov{align-items:center}.modal{border-radius:24px}}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+#toast{position:fixed;bottom:84px;left:50%;transform:translateX(-50%);background:#1d2135;color:#fff;padding:10px 18px;border-radius:99px;z-index:100;opacity:0;transition:.3s;pointer-events:none;font-size:14px;max-width:90vw;text-align:center}
+#toast.on{opacity:1}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal .h{font-size:11px;color:var(--muted);text-align:center;padding:4px 0}
+.cal .d{aspect-ratio:1/1.05;border-radius:12px;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;font-size:14px;border:2px solid transparent;position:relative}
+.cal .d.today{border-color:var(--primary)}.cal .d.sel{background:var(--primary);color:#fff}
+.cal .d small{font-size:9px;color:var(--muted)}.cal .d.sel small{color:#fff}.cal .d.fri{color:var(--bad)}
+.cal .d .dot{position:absolute;top:4px;left:5px;width:6px;height:6px;border-radius:50%;background:var(--bad)}
+.cal .d.ok::after{content:'✓';position:absolute;bottom:2px;right:5px;font-size:9px;color:var(--ok)}
+.ring{display:block;margin:auto}.ring text{fill:var(--text)}
+.tm{text-align:center}.tm .time{font-size:44px;font-weight:700;margin-top:-118px;margin-bottom:70px;font-variant-numeric:tabular-nums}
+.emo{display:flex;gap:8px;justify-content:space-between}.emo label{flex:1;margin:0;text-align:center;font-size:28px;cursor:pointer;padding:8px 0;border-radius:14px;background:var(--bg);filter:grayscale(1);opacity:.6}
+.emo input{display:none}.emo input:checked+span{filter:none}.emo label:has(input:checked){filter:none;opacity:1;background:var(--primary-soft)}
+.emoji-grid{display:flex;flex-wrap:wrap;gap:8px}.emoji-grid button{font-size:24px;width:46px;height:46px;border-radius:14px;border:2px solid transparent;background:var(--bg);cursor:pointer}.emoji-grid button.sel{border-color:var(--primary);background:var(--primary-soft)}
+.onb{max-width:460px;margin:0 auto;padding:24px 16px}
+.bdg{display:flex;flex-wrap:wrap;gap:8px}.bdg span{padding:6px 12px;border-radius:99px;background:var(--bg);font-size:13px;opacity:.45;filter:grayscale(1)}.bdg span.on{opacity:1;filter:none;background:#fef3c7;color:#92400e}
+.empty{text-align:center;color:var(--muted);padding:18px 6px;font-size:14px}
+.rep{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--border);font-size:14px}.rep:last-child{border:0}
+hr{border:0;border-top:1px solid var(--border);margin:14px 0}
+.pill{display:inline-flex;gap:6px;align-items:center;font-size:12px;padding:2px 10px;border-radius:99px;background:rgba(255,255,255,.18)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="modal"></div>
+<div id="toast"></div>
+<script>
+'use strict';
+/*J-START*/
+const div=(a,b)=>~~(a/b),mod=(a,b)=>a-~~(a/b)*b;
+const BR=[-61,9,38,199,426,686,756,818,1111,1181,1210,1635,2060,2097,2192,2262,2324,2394,2456,3178];
+function jalCal(jy){let bl=BR.length,gy=jy+621,leapJ=-14,jp=BR[0],jm,jump=0,leap,leapG,march,n,i;
+ for(i=1;i<bl;i++){jm=BR[i];jump=jm-jp;if(jy<jm)break;leapJ+=div(jump,33)*8+div(mod(jump,33),4);jp=jm}
+ n=jy-jp;leapJ+=div(n,33)*8+div(mod(n,33)+3,4);
+ if(mod(jump,33)===4&&jump-n===4)leapJ++;
+ leapG=div(gy,4)-div((div(gy,100)+1)*3,4)-150;march=20+leapJ-leapG;
+ if(jump-n<6)n=n-jump+div(jump+4,33)*33;
+ leap=mod(mod(n+1,33)-1,4);if(leap===-1)leap=4;
+ return{leap,gy,march}}
+function g2d(gy,gm,gd){let d=div((gy+div(gm-8,6)+100100)*1461,4)+div(153*mod(gm+9,12)+2,5)+gd-34840408;
+ d=d-div(div(gy+100100+div(gm-8,6),100)*3,4)+752;return d}
+function d2g(jdn){let j=4*jdn+139361631;j=j+div(div(4*jdn+183187720,146097)*3,4)*4-3908;
+ const i=div(mod(j,1461),4)*5+308,gd=div(mod(i,153),5)+1,gm=mod(div(i,153),12)+1,gy=div(j,1461)-100100+div(8-gm,6);
+ return{gy,gm,gd}}
+function j2d(jy,jm,jd){const r=jalCal(jy);return g2d(r.gy,3,r.march)+(jm-1)*31-div(jm,7)*(jm-7)+jd-1}
+function d2j(jdn){const gy=d2g(jdn).gy;let jy=gy-621;const r=jalCal(jy),j1=g2d(gy,3,r.march);let k=jdn-j1,jm,jd;
+ if(k>=0){if(k<=185){return{jy,jm:1+div(k,31),jd:mod(k,31)+1}}else k-=186}
+ else{jy-=1;k+=179;if(r.leap===1)k+=1}
+ jm=7+div(k,30);jd=mod(k,30)+1;return{jy,jm,jd}}
+const DAYS=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
+const MONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const p2=n=>String(n).padStart(2,'0');
+const P=s=>{const[a,b,c]=s.split('-').map(Number);return{gy:a,gm:b,gd:c}};
+const ISO=(y,m,d)=>`${y}-${p2(m)}-${p2(d)}`;
+const addDays=(s,n)=>{const{gy,gm,gd}=P(s);return new Date(Date.UTC(gy,gm-1,gd+n)).toISOString().slice(0,10)};
+const dowG=s=>{const{gy,gm,gd}=P(s);return new Date(Date.UTC(gy,gm-1,gd)).getUTCDay()};
+const dow=s=>(dowG(s)+1)%7;
+const toJ=s=>{const{gy,gm,gd}=P(s);return d2j(g2d(gy,gm,gd))};
+const fromJ=(jy,jm,jd)=>{const g=d2g(j2d(jy,jm,jd));return ISO(g.gy,g.gm,g.gd)};
+const jLen=(jy,jm)=>jm<=6?31:jm<=11?30:(jalCal(jy).leap===0?30:29);
+const fmtJ=s=>{const j=toJ(s);return fa(j.jd)+' '+MONTHS[j.jm-1]+' '+fa(j.jy)};
+const fmtJs=s=>{const j=toJ(s);return fa(j.jd)+' '+MONTHS[j.jm-1]};
+const fmtJW=s=>DAYS[dow(s)]+' '+fmtJs(s);
+const wk=s=>addDays(s,-dow(s));
+const diffDays=(a,b)=>{const x=P(a),y=P(b);return Math.round((Date.UTC(y.gy,y.gm-1,y.gd)-Date.UTC(x.gy,x.gm-1,x.gd))/864e5)};
+/*J-END*/
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3);
+const $=s=>document.querySelector(s);
+const mins=hm=>{const[h,m]=String(hm||'0:0').split(':').map(Number);return(h||0)*60+(m||0)};
+const hm=m=>p2(Math.floor(m/60)%24)+':'+p2(m%60);
+const fmtDur=m=>{m=Math.round(m);const h=Math.floor(m/60),r=m%60;if(!h)return fa(r)+' دقیقه';return r?`${fa(h)} ساعت و ${fa(r)} دقیقه`:`${fa(h)} ساعت`};
+
+/* ---------- زمان (از اینترنت) ---------- */
+let delta=0,timeSrc='device';
+const tehran=()=>{const f=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tehran',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date(Date.now()+delta));const o={};f.forEach(p=>o[p.type]=p.value);return{date:`${o.year}-${o.month}-${o.day}`,time:`${o.hour}:${o.minute}`}};
+const today=()=>tehran().date;
+async function tf(u,fn){const c=new AbortController(),t=setTimeout(()=>c.abort(),5000);try{return await fn(await fetch(u,{signal:c.signal,cache:'no-store'}))}finally{clearTimeout(t)}}
+async function syncTime(){
+ const before=today();
+ try{const ms=await tf('https://worldtimeapi.org/api/timezone/Asia/Tehran',async r=>{const j=await r.json();return new Date(j.utc_datetime||j.datetime).getTime()});if(ms&&!isNaN(ms)){delta=ms-Date.now();timeSrc='internet'}}catch(e){}
+ if(timeSrc!=='internet'){try{const ms=await tf(location.href.split('#')[0],async r=>new Date(r.headers.get('Date')).getTime());if(ms&&!isNaN(ms)){delta=ms-Date.now();timeSrc='internet'}}catch(e){}}
+ if(today()!==before||timeSrc==='internet')render();
+}
+
+/* ---------- داده‌ها ---------- */
+const LS={m:{},bad:false,get(k){try{return localStorage.getItem(k)}catch(e){this.bad=true;return k in this.m?this.m[k]:null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){this.bad=true;this.m[k]=v}}};
+const SK='sp_data_v1',CK='sp_cfg_v1',GF='study-planner-data.json';
+const TYPES={study:'مطالعه',test:'تست‌زنی',review:'مرور',online:'کلاس آنلاین',exam:'آزمون'};
+const GRADES=['دهم','یازدهم','دوازدهم','فارغ‌التحصیل'];
+const PAL=['#3b82f6','#10b981','#8b5cf6','#f59e0b','#ef4444','#ec4899','#0d9488','#6366f1','#0ea5e9','#65a30d','#a16207','#f97316'];
+const DR=[['08:00','09:00'],['09:00','10:00'],['10:00','11:00'],['11:00','12:00'],['15:00','16:00'],['16:00','17:00'],['17:00','18:00'],['18:00','19:00'],['19:00','20:00']];
+const defaults=()=>({v:1,updatedAt:0,profile:null,
+ subjects:[
+  {id:'phy',name:'فیزیک',group:'spec',online:true,color:'#3b82f6'},{id:'che',name:'شیمی',group:'spec',online:true,color:'#10b981'},
+  {id:'cal',name:'حسابان',group:'spec',online:true,color:'#8b5cf6'},{id:'geo',name:'هندسه',group:'spec',online:true,color:'#f59e0b'},
+  {id:'sta',name:'آمار',group:'spec',online:true,color:'#ef4444'},
+  {id:'his',name:'تاریخ',group:'gen',online:false,color:'#a16207'},{id:'per',name:'فارسی',group:'gen',online:true,color:'#ec4899'},
+  {id:'ara',name:'عربی',group:'gen',online:false,color:'#0d9488'},{id:'rel',name:'دینی',group:'gen',online:false,color:'#6366f1'},
+  {id:'eng',name:'زبان',group:'gen',online:false,color:'#0ea5e9'},{id:'env',name:'محیط زمین',group:'gen',online:false,color:'#65a30d'}],
+ plan:{rows:DR.map((t,i)=>({id:'r'+(i+1),start:t[0],end:t[1]})),cells:{}},
+ tasks:[],reports:[],closed:{},slotDone:{},goals:[],exams:[],
+ settings:{dailyGoal:120,weeklyGoal:20,pomo:{focus:25,brk:5,long:15,every:4}}});
+function normalize(o){const d=defaults();o=o&&typeof o==='object'?o:{};for(const k in d)if(o[k]===undefined)o[k]=d[k];const s=o.settings||{};o.settings={...d.settings,...s,pomo:{...d.settings.pomo,...(s.pomo||{})}};if(!o.plan||!Array.isArray(o.plan.rows)||!o.plan.cells)o.plan=d.plan;while(o.plan.rows.length<9){const i=o.plan.rows.length;o.plan.rows.push({id:'p'+uid(),start:DR[i][0],end:DR[i][1]})}return o}
+let cfg={};try{cfg=JSON.parse(LS.get(CK)||'{}')||{}}catch(e){}
+const saveCfg=()=>{try{LS.set(CK,JSON.stringify(cfg))}catch(e){}};
+let S;try{S=normalize(JSON.parse(LS.get(SK)))}catch(e){S=normalize(null)}
+function save(){S.updatedAt=Date.now();if(LS.bad&&!save.w){save.w=1;setTimeout(()=>toast('ذخیره‌سازی مرورگر بسته است؛ سایت را در مرورگر عادی یا گیت‌هاب‌پیجز باز کن'),400)}try{LS.set(SK,JSON.stringify(S))}catch(e){toast('حافظه مرورگر پر است!')}queuePush()}
+const subj=id=>S.subjects.find(s=>s.id===id);
+const sname=id=>(subj(id)||{name:'نامشخص'}).name;
+const scolor=id=>(subj(id)||{color:'#888'}).color;
+
+/* ---------- گیت‌هاب (Gist) ---------- */
+let syncState=cfg.token&&cfg.gistId?'ok':'off',pushT;
+const SYI={off:'☁️',ok:'✅',busy:'🔄',err:'⚠️',pending:'⏳'};
+function setSync(s){syncState=s;const e=$('#syncic');if(e)e.textContent=SYI[s]||'☁️'}
+function queuePush(){if(!cfg.token||!cfg.gistId||!cfg.auto)return;clearTimeout(pushT);pushT=setTimeout(push,2500);setSync('pending')}
+async function gh(path,method='GET',body){const r=await fetch('https://api.github.com'+path,{method,headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+cfg.token,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});if(!r.ok){const e=new Error('HTTP '+r.status);e.status=r.status;throw e}return r.json()}
+async function push(){if(!cfg.token)return false;try{setSync('busy');const content=JSON.stringify(S);
+ if(!cfg.gistId){const g=await gh('/gists','POST',{description:'Study planner data',public:false,files:{[GF]:{content}}});cfg.gistId=g.id}
+ else await gh('/gists/'+cfg.gistId,'PATCH',{files:{[GF]:{content}}});
+ cfg.lastSync=Date.now();saveCfg();setSync('ok');return true}catch(e){console.warn(e);setSync('err');return false}}
+async function pull(){const g=await gh('/gists/'+cfg.gistId);const f=g.files[GF]||Object.values(g.files)[0];let t=f.content;if(f.truncated)t=await(await fetch(f.raw_url)).text();return normalize(JSON.parse(t))}
+async function initSync(){if(!cfg.token||!cfg.gistId)return;try{setSync('busy');const r=await pull();
+ if(r.updatedAt>S.updatedAt){S=r;LS.set(SK,JSON.stringify(S));render();setSync('ok');toast('اطلاعات از گیت‌هاب دریافت شد')}
+ else if(S.updatedAt>r.updatedAt)await push();else setSync('ok')}catch(e){setSync('err')}}
+
+/* ---------- جمله‌های انگیزشی ---------- */
+const QUOTES=['هر روز یک قدم کوچک، آخرش یک مسیر بزرگ می‌سازد.','امروز را جدی بگیر؛ فردای تو از همین ساعت‌ها ساخته می‌شود.','نیازی نیست عالی باشی، فقط باید شروع کنی.','سختیِ امروز، آسانیِ امتحانِ فرداست.','تمرکز یعنی همین یک ساعت را کامل زندگی کنی.','پیشرفت یعنی دیروزِ خودت را شکست بدهی، نه دیگران را.','اگر خسته‌ای استراحت کن، اما تسلیم نشو.','هر تستی که می‌زنی یک گام نزدیک‌تر به هدف است.','انضباط، پلی است میان هدف و رسیدن.','کم نیست؛ فقط پیوسته باش.','موفقیت مجموعه‌ی تلاش‌های کوچکی است که هر روز تکرار می‌شوند.','گوشی را کنار بگذار، آینده‌ات منتظر است.','امروز بهترین زمان برای شروع است، نه فردا.','اشتباه کردن یعنی در حال یاد گرفتنی.','ذهنِ آرام بهتر یاد می‌گیرد؛ نفس عمیق بکش و ادامه بده.','هدفت را به قدم‌های کوچک تقسیم کن، بعد فقط قدمِ بعدی را بردار.','کسی که امروز زحمت می‌کشد، فردا افتخار می‌کند.','اراده یعنی وقتی حوصله نداری هم درس بخوانی.','یک مبحث سخت، فقط یک مبحثِ ندیده است.','برنامه داشتن نصف راه است، نصف دیگر عمل کردن به آن.','خودت را با هیچ‌کس جز خودِ هفته‌ی پیش مقایسه نکن.','هر مرور، یک یادگیری را محکم‌تر می‌کند.','امروز کاری کن که فردا از خودت ممنون باشی.','دشواری، نشانه‌ی این است که در حال رشد کردنی.','ساعتی که با تمرکز می‌خوانی از سه ساعت حواس‌پرتی ارزشمندتر است.','قله را ببین، اما به پای خودت نگاه کن.','خستگی موقتی است، افتخارِ رسیدن ماندگار.','اول سخت‌ترین درس را بخوان؛ بقیه‌ی روز سبک می‌شود.','کارهای نیمه‌تمام را تمام کن؛ حس خوبش را دوست خواهی داشت.','اعتمادبه‌نفس از تمرین می‌آید، نه از تصور.','کم‌کم را دست‌کم نگیر؛ دریا از قطره ساخته شده.','امروز یک درصد بهتر باش؛ همین کافی است.','شکست یعنی روشی که جواب نداد را پیدا کردی؛ روش بعدی را امتحان کن.','خواب کافی هم بخشی از برنامه‌ی درسی توست.','مسیر سخت است ولی تو سخت‌تری.','به جای «نمی‌توانم» بگو «هنوز یاد نگرفته‌ام».','هر صفحه‌ای که می‌خوانی، یک قدم جلوتری.','امروز را برای خودِ آینده‌ات بخوان.','سکوت و تمرکز، قدرتمندترین ابزار توست.','مهم نیست چقدر آهسته می‌روی، مهم این است که نایستی.','رؤیای بزرگ با ساعت‌های کوچکِ منظم ساخته می‌شود.','یادگرفتن لذت دارد، اگر با کنجکاوی شروع کنی.','امروز یک گام کوچکِ دیگر؛ فردا یک پیشرفت بزرگ.','بدون عجله، بدون توقف.','اراده‌ات را با عادت‌های کوچکِ روزانه بساز.','از اشتباه‌های آزمون‌های قبل، نقشه‌ی راه بساز.','همین الان شروع کن؛ منتظر حال خوب نمان.','تو برای این مسیر ساخته شده‌ای.','تلاشِ امروزت، اعتمادِ فردایت است.','یک تست دیگر، یک مرور دیگر، یک قدم دیگر.','قدر ساعت‌های پرتمرکزت را بدان.','آرام و پیوسته، بهتر از پرشتاب و ناپایدار.','امروز با تمام توان، فردا با افتخار.','وقتی کار را شروع می‌کنی، انگیزه هم دنبالت می‌آید.','خوب بخوان، خوب استراحت کن، خوب بدرخش.','هر درسی که امروز مسلط می‌شوی، یک نگرانی از فردا کم می‌کند.','اشتیاقت را حفظ کن؛ بقیه‌ی چیزها دنبالش می‌آید.','روزهای سخت هم تمام می‌شوند، اما درسی که خوانده‌ای می‌ماند.','عقب نیفتاده‌ای؛ فقط وقتِ ادامه دادن است.','با خودت مهربان باش، ولی بهانه‌گیر نه.','کوچک‌ترین پیروزی‌ها را جشن بگیر.','مسیر موفقیت با «شروع کردن» باز می‌شود.','جایی که تمرکز هست، پیشرفت هست.','امروز چیزی یاد بگیر که دیروز بلد نبودی.','هر روز که برنامه‌ات را انجام می‌دهی، به قولی که به خودت داده‌ای وفا کرده‌ای.','باور به خودت را با عمل تقویت کن.','پشتکار از استعداد مهم‌تر است.','مرور شبانه، حافظه‌ی فردا را می‌سازد.','صبور باش؛ ثمره‌ی تلاش دیر می‌رسد ولی شیرین است.'];
+function seeded(seed){let a=seed+0x6D2B79F5;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function quoteOf(iso){const{gy,gm,gd}=P(iso);const di=Math.floor(Date.UTC(gy,gm-1,gd)/864e5),N=QUOTES.length,cyc=Math.floor(di/N),pos=di%N;
+ const o=[...Array(N).keys()],r=seeded(cyc+7);for(let i=N-1;i>0;i--){const j=Math.floor(r()*(i+1));[o[i],o[j]]=[o[j],o[i]]}return QUOTES[o[pos]]}
+
+/* ---------- آمار ---------- */
+const repsOn=d=>S.reports.filter(r=>r.date===d);
+const minOn=d=>S.reports.reduce((a,r)=>r.date===d?a+r.min:a,0);
+const minRange=(a,b)=>S.reports.reduce((s,r)=>r.date>=a&&r.date<=b?s+r.min:s,0);
+function breakdown(a,b){const o={};S.reports.forEach(r=>{if(r.date>=a&&r.date<=b)o[r.subject]=(o[r.subject]||0)+r.min});return Object.entries(o).sort((x,y)=>y[1]-x[1])}
+function range(p){const t=today();if(p==='day')return[t,t];if(p==='week'){const s=wk(t);return[s,addDays(s,6)]}const j=toJ(t);return[fromJ(j.jy,j.jm,1),fromJ(j.jy,j.jm,jLen(j.jy,j.jm))]}
+function dayTotals(){const o={};S.reports.forEach(r=>o[r.date]=(o[r.date]||0)+r.min);return o}
+function streak(){const g=Math.max(1,S.settings.dailyGoal);let d=today(),n=0;if(minOn(d)<g)d=addDays(d,-1);while(minOn(d)>=g&&n<3650){n++;d=addDays(d,-1)}return n}
+function bestStreak(){const g=Math.max(1,S.settings.dailyGoal),t=dayTotals(),ds=Object.keys(t).filter(d=>t[d]>=g).sort();let best=0,cur=0,prev=null;ds.forEach(d=>{cur=prev&&diffDays(prev,d)===1?cur+1:1;best=Math.max(best,cur);prev=d});return best}
+function points(){const g=Math.max(1,S.settings.dailyGoal),t=dayTotals();let p=0;for(const d in t){p+=Math.floor(t[d]/10);if(t[d]>=g)p+=20}p+=5*S.tasks.filter(x=>x.done).length+10*Object.keys(S.closed).length;return p}
+function badges(){const tot=S.reports.reduce((a,r)=>a+r.min,0),bs=bestStreak(),sc=S.exams.filter(e=>e.score!==''&&e.score!=null).length,dn=S.tasks.filter(x=>x.done).length;
+ return[['🌱 اولین گزارش',S.reports.length>=1],['🔥 ۳ روز پیاپی',bs>=3],['🔥 ۷ روز پیاپی',bs>=7],['🏅 ۳۰ روز پیاپی',bs>=30],['⏳ ۱۰ ساعت مطالعه',tot>=600],['⏳ ۵۰ ساعت مطالعه',tot>=3000],['👑 ۱۰۰ ساعت مطالعه',tot>=6000],['🎯 ۳ آزمون ثبت‌شده',sc>=3],['✅ ۲۵ کار انجام‌شده',dn>=25],['🍅 اولین پومودورو',S.reports.some(r=>r.pomo)]]}
+function plannedBySubj(){const o={};for(const k in S.plan.cells){const row=S.plan.rows.find(r=>r.id===k.split('|')[0]);if(!row)continue;const c=S.plan.cells[k];o[c.subject]=(o[c.subject]||0)+Math.max(0,mins(row.end)-mins(row.start))}return o}
+const slotsOfDay=d=>S.plan.rows.map(r=>({row:r,cell:S.plan.cells[r.id+'|'+d]})).filter(x=>x.cell).sort((a,b)=>a.row.start.localeCompare(b.row.start));
+function upcoming(){const t=today();return S.exams.filter(e=>e.date>=t).sort((a,b)=>a.date.localeCompare(b.date))}
+const pct=e=>e.score===''||e.score==null||!e.max?null:Math.round(e.score/e.max*1000)/10;
+function cd(date){const n=diffDays(today(),date);return n===0?'امروز!':n===1?'فردا':n>0?fa(n)+' روز مانده':fa(-n)+' روز پیش'}
+
+/* ---------- اجزای رابط ---------- */
+function subjOpts(sel,empty){let h=empty?`<option value="">— ${empty} —</option>`:'';[['spec','تخصصی'],['gen','غیرتخصصی']].forEach(([g,l])=>{const L=S.subjects.filter(s=>s.group===g);if(L.length)h+=`<optgroup label="${l}">${L.map(s=>`<option value="${s.id}" ${s.id===sel?'selected':''}>${esc(s.name)}</option>`).join('')}</optgroup>`});return h}
+function typeOpts(sid,sel){const s=subj(sid);return Object.entries(TYPES).filter(([k])=>k!=='online'||(s&&s.online)).map(([k,v])=>`<option value="${k}" ${k===sel?'selected':''}>${v}</option>`).join('')}
+const chip=(sid)=>`<span class="chip" style="--c:${scolor(sid)}">${esc(sname(sid))}</span>`;
+function jpick(name,iso){const t=toJ(today()).jy,j=toJ(iso||today());let y='';for(let i=Math.min(t-3,j.jy);i<=Math.max(t+5,j.jy);i++)y+=`<option value="${i}" ${i===j.jy?'selected':''}>${fa(i)}</option>`;
+ return`<div class="jp"><select name="${name}_d">${Array.from({length:31},(_,i)=>`<option value="${i+1}" ${i+1===j.jd?'selected':''}>${fa(i+1)}</option>`).join('')}</select><select name="${name}_m">${MONTHS.map((m,i)=>`<option value="${i+1}" ${i+1===j.jm?'selected':''}>${m}</option>`).join('')}</select><select name="${name}_y">${y}</select></div>`}
+const readJ=(fd,n)=>{const y=+fd.get(n+'_y'),m=+fd.get(n+'_m');return fromJ(y,m,Math.min(+fd.get(n+'_d'),jLen(y,m)))};
+const logoHtml=p=>`<div class="logo">${p&&p.logo&&p.logo.startsWith('data:')?`<img src="${p.logo}" alt="">`:esc((p&&p.logo)||'📚')}</div>`;
+const taskRow=x=>{const s=subj(x.subject);return`<div class="task ${x.done?'done':''}"><input type="checkbox" ${x.done?'checked':''} data-act="taskToggle" data-id="${x.id}"><span class="grow">${esc(x.title)}${s?`<em class="mini" style="--c:${s.color}">${esc(s.name)}</em>`:''}</span><button class="x" data-act="taskDel" data-id="${x.id}" aria-label="حذف">✕</button></div>`};
+const bar=(label,val,max,color,mark)=>`<div class="hb"><div class="l"><span>${label}</span><span class="muted">${fmtDur(val)}</span></div><div class="t" style="--c:${color||'var(--primary)'}"><i style="width:${max?Math.min(100,val/max*100):0}%"></i>${mark?`<u style="right:${Math.min(100,mark/max*100)}%"></u>`:''}</div></div>`;
+function ringSvg(p,size,txt,sub){const r=size/2-10,c=2*Math.PI*r;return`<svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--primary-soft)" stroke-width="10"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--primary)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-Math.min(1,p))}" transform="rotate(-90 ${size/2} ${size/2})"/><text x="50%" y="${sub?'46%':'54%'}" text-anchor="middle" font-size="${size/5.2}" font-weight="700">${txt}</text>${sub?`<text x="50%" y="64%" text-anchor="middle" font-size="11" style="fill:var(--muted)">${sub}</text>`:''}</svg>`}
+let tt;function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2200)}
+function openModal(h){$('#modal').innerHTML=`<div class="modal-ov" data-act="ovClose"><div class="modal">${h}</div></div>`}
+const closeModal=()=>{$('#modal').innerHTML=''};
+let askCb=null;
+function ask(msg,cb){askCb=cb;openModal(`<h3>${esc(msg)}</h3><div class="row" style="margin-top:14px"><button type="button" class="btn" data-act="askYes">بله</button><button type="button" class="btn ghost" data-act="closeModal">انصراف</button></div>`)}
+
+/* ---------- صفحه‌ها ---------- */
+const ui={page:'home',drawer:false,wk:0,rw:0,dashP:'week',calY:0,calM:0,calSel:null,repDate:null};
+let deferredPrompt=null;
+const isStandalone=()=>{try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true}catch(e){return false}};
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;render()});
+window.addEventListener('appinstalled',()=>{deferredPrompt=null;toast('برنامه نصب شد ✓');render()});
+const NAV=[['home','🏠','امروز'],['dash','📊','داشبورد و آمار'],['plan','🗓️','برنامه هفتگی'],['report','✍️','ثبت گزارش'],['reports','📒','گزارش‌های هفتگی'],['calendar','📅','تقویم'],['exams','🎯','آزمون‌ها و شمارش معکوس'],['pomo','⏱️','تایمر پومودورو'],['goals','🏁','هدف‌گذاری'],['settings','⚙️','تنظیمات و همگام‌سازی']];
+
+function pageHome(){
+ const t=today(),d=dow(t),nowT=tehran().time,slots=slotsOfDay(d),tasks=S.tasks.filter(x=>x.date===t);
+ const m=minOn(t),g=Math.max(1,S.settings.dailyGoal),cl=S.closed[t],up=upcoming().slice(0,3),sk=streak();
+ const done=slots.filter(s=>S.slotDone[t+'|'+s.row.id]).length;
+ const hr=+nowT.slice(0,2),greet=hr<5?'شب بخیر':hr<12?'صبح بخیر':hr<17?'ظهر بخیر':hr<20?'عصر بخیر':'شب بخیر';
+ return`<div class="card hero"><div class="row between"><div><small>${greet} ${esc(S.profile.name)} 👋</small><h2 style="margin:0">${fmtJW(t)} ${fa(toJ(t).jy)}</h2></div><span class="pill">${timeSrc==='internet'?'🌐 تاریخ از اینترنت':'📱 تاریخ دستگاه'}</span></div><div class="q">«${quoteOf(t)}»</div></div>
+ <div class="card"><div class="row between"><h2>✅ کارهای امروز</h2><button class="btn sm ghost" data-act="goto" data-p="plan">برنامه‌ریزی کارهای هفته</button></div>
+  ${tasks.length?tasks.map(taskRow).join(''):'<div class="empty">برای امروز کاری ثبت نشده. یکی اضافه کن 👇</div>'}
+  <form class="add" data-form="addTask" data-date="${t}"><input name="title" placeholder="کار جدید…" required maxlength="120"><select name="subject"><option value="">درس؟</option>${subjOpts('')}</select><button class="btn">+</button></form></div>
+ ${up.length?`<div class="card"><h2>⏳ شمارش معکوس</h2>${up.map(e=>`<div class="rep"><span class="grow"><b>${esc(e.title)}</b> ${e.subject?chip(e.subject):''}<div class="muted">${fmtJ(e.date)}</div></span><span class="badge" style="font-size:13px">${cd(e.date)}</span></div>`).join('')}</div>`:''}
+ <div class="card"><div class="row between"><h2>🗓️ برنامه امروز</h2><span class="muted">${slots.length?`${fa(done)} از ${fa(slots.length)} انجام شد`:''}</span></div>
+  ${slots.length?slots.map(({row,cell})=>{const k=t+'|'+row.id,dn=S.slotDone[k],now=nowT>=row.start&&nowT<row.end;return`<div class="slot ${dn?'done':''} ${now?'now':''}" style="--c:${scolor(cell.subject)}" data-act="slotToggle" data-k="${k}"><div class="time">${fa(row.start)} – ${fa(row.end)}</div><div class="grow"><b>${esc(sname(cell.subject))}</b><small>${cell.type==='online'?'🎥 ':''}${TYPES[cell.type]||''}${cell.note?' · '+esc(cell.note):''}</small></div><span class="tick">${dn?'✓':''}</span></div>`}).join(''):`<div class="empty">برای ${DAYS[d]} برنامه‌ای نوشته نشده.<br><button class="btn sm ghost" style="margin-top:8px" data-act="goto" data-p="plan">نوشتن برنامه هفتگی</button></div>`}</div>
+ <div class="card"><div class="row" style="gap:16px">${ringSvg(m/g,120,fa(Math.round(m/g*100))+'٪','از هدف امروز')}<div class="grow"><b>${fmtDur(m)}</b><div class="muted">مطالعه امروز · هدف ${fmtDur(g)}</div><div class="muted">🔥 ${fa(sk)} روز پیاپی</div><div class="row" style="margin-top:10px"><button class="btn sm" data-act="goto" data-p="report">✍️ ثبت گزارش</button><button class="btn sm ghost" data-act="closeDay">${cl?'✓ پایان گزارش ثبت شد':'🌙 پایان گزارش روز'}</button></div></div></div></div>
+ ${goalsCard()}`}
+
+function goalsCard(){const gl=S.goals.slice().sort((a,b)=>(a.progress>=100)-(b.progress>=100)||(a.due||'').localeCompare(b.due||''));
+ return`<div class="card" id="goals"><div class="row between"><h2>🏁 هدف‌گذاری</h2><button class="btn sm" data-act="goalEdit" data-id="">+ هدف جدید</button></div>
+ ${gl.length?gl.map(g=>`<div style="padding:10px 0;border-bottom:1px dashed var(--border)"><div class="row between"><b style="${g.progress>=100?'text-decoration:line-through;color:var(--muted)':''}">${esc(g.title)}</b><span class="row"><span class="badge">${esc(g.kind)}</span><button class="x" data-act="goalEdit" data-id="${g.id}">✎</button></span></div><div class="hb" style="margin:4px 0"><div class="t"><i style="width:${g.progress}%;background:${g.progress>=100?'var(--ok)':'var(--primary)'}"></i></div></div><div class="muted">${fa(g.progress)}٪${g.due?' · موعد '+fmtJs(g.due)+' ('+cd(g.due)+')':''}</div></div>`).join(''):'<div class="empty">هنوز هدفی نگذاشتی. هدف‌های هفتگی، ماهانه و سالانه‌ات را اینجا بنویس.</div>'}</div>`}
+
+function pageDash(){
+ const t=today(),[wa,wb]=range('week'),[ma,mb]=range('month'),p=ui.dashP,[a,b]=range(p),tot=minRange(a,b),g=Math.max(1,S.settings.dailyGoal);
+ const el=Math.max(1,Math.min(diffDays(a,b)+1,diffDays(a,t)+1)),bd=breakdown(a,b),pts=points(),lv=Math.floor(pts/500)+1,wm=minRange(wa,wb),wg=Math.max(1,S.settings.weeklyGoal)*60;
+ let days=[];for(let d=a;d<=b;d=addDays(d,1))days.push(d);const vals=days.map(minOn),mx=Math.max(g,...vals);let best=0,bi=0;vals.forEach((v,i)=>{if(v>best){best=v;bi=i}});
+ const chart=p==='day'?'':`<div class="bars">${days.map((d,i)=>`<div title="${fmtJs(d)}: ${fmtDur(vals[i])}"><i class="${vals[i]>=g?'ok':''}" style="height:${vals[i]/mx*100}%"></i><span>${p==='week'?DAYS[i][0]:fa(toJ(d).jd)}</span></div>`).join('')}</div>`;
+ return`<div class="grid" style="margin-bottom:14px"><div class="stat"><b>${fmtDur(minOn(t))}</b><span>امروز</span></div><div class="stat"><b>${fmtDur(wm)}</b><span>این هفته</span></div><div class="stat"><b>${fmtDur(minRange(ma,mb))}</b><span>این ماه</span></div></div>
+ <div class="card"><div class="tabs">${[['day','روزانه'],['week','هفتگی'],['month','ماهانه']].map(([k,l])=>`<button class="${p===k?'on':''}" data-act="dashP" data-p="${k}">${l}</button>`).join('')}</div>
+  <div class="grid"><div class="stat"><b>${fmtDur(tot)}</b><span>مجموع</span></div><div class="stat"><b>${fmtDur(tot/el)}</b><span>میانگین روزانه</span></div>${p!=='day'?`<div class="stat"><b>${best?fmtJs(days[bi]):'—'}</b><span>بهترین روز</span></div>`:''}</div>
+  ${chart}${p!=='day'?`<div class="muted" style="margin-top:6px">ستون سبز یعنی به هدف روزانه رسیدی (${fmtDur(g)})</div>`:''}
+  <h3 style="margin-top:16px">سهم هر درس</h3>${bd.length?bd.map(([id,v])=>bar(esc(sname(id)),v,bd[0][1],scolor(id))).join(''):'<div class="empty">در این بازه گزارشی ثبت نشده.</div>'}</div>
+ <div class="card"><h3>🎯 هدف هفتگی</h3>${bar('پیشرفت این هفته',wm,Math.max(wg,wm),'var(--primary)')}<div class="muted">هدف: ${fmtDur(wg)}</div></div>
+ <div class="card"><div class="row between"><h3>🏆 سطح ${fa(lv)}</h3><span class="muted">${fa(pts)} امتیاز · 🔥 ${fa(streak())} روز پیاپی (رکورد ${fa(bestStreak())})</span></div>${bar('تا سطح بعد',pts%500,500)}<div class="bdg" style="margin-top:10px">${badges().map(([n,o])=>`<span class="${o?'on':''}">${n}</span>`).join('')}</div></div>
+ ${examStats()}`}
+
+function examStats(){const sc=S.exams.filter(e=>pct(e)!=null);if(!sc.length)return'';const by={};sc.forEach(e=>{const k=e.subject||'';(by[k]=by[k]||[]).push(pct(e))});
+ return`<div class="card"><h3>📝 میانگین آزمون‌ها</h3>${Object.entries(by).map(([k,v])=>{const av=v.reduce((a,b)=>a+b,0)/v.length;return`<div class="hb"><div class="l"><span>${k?esc(sname(k)):'عمومی'}</span><span class="muted">${fa(Math.round(av))}٪</span></div><div class="t" style="--c:${k?scolor(k):'var(--primary)'}"><i style="width:${av}%"></i></div></div>`}).join('')}</div>`}
+
+function pagePlan(){
+ const t=today(),td=dow(t),ws=addDays(wk(t),ui.wk*7);
+ let h=`<div class="card"><div class="row between"><h2>🗓️ برنامه هفتگی</h2><button class="btn sm" data-act="timesEdit">🕒 ویرایش ساعت‌ها</button></div><p class="muted" style="margin-top:0">جدول ${fa(S.plan.rows.length)} ستون ساعت دارد. روی هر خانه بزن تا درس همان روز و ساعت را انتخاب کنی. برای تغییر ساعتِ یک ستون روی ساعت بالای آن بزن، یا «ویرایش ساعت‌ها» را بزن. برنامه هر هفته تکرار می‌شود.</p>
+ <div class="scroll"><table class="plan"><thead><tr><th class="rh">روز</th>${S.plan.rows.map(r=>`<th class="ch" data-act="rowEdit" data-id="${r.id}">${fa(r.start)}<br>${fa(r.end)}</th>`).join('')}</tr></thead><tbody>`;
+ for(let i=0;i<7;i++){h+=`<tr><th class="rh ${i===td?'today':''}">${DAYS[i]}</th>`;S.plan.rows.forEach(r=>{const c=S.plan.cells[r.id+'|'+i];h+=`<td class="${i===td?'today':''}" data-act="cellEdit" data-r="${r.id}" data-d="${i}">${c?`<div class="cell" style="--c:${scolor(c.subject)}">${c.type==='online'?'🎥 ':''}${esc(sname(c.subject))}<div style="font-weight:400;font-size:10px;opacity:.9">${TYPES[c.type]||''}</div></div>`:'<span class="plus">+</span>'}</td>`});h+='</tr>'}
+ h+='</tbody></table></div></div>';
+ const pb=Object.entries(plannedBySubj()).sort((a,b)=>b[1]-a[1]);
+ if(pb.length)h+=`<div class="card"><h3>ساعت‌های برنامه‌ریزی‌شده در هفته</h3>${pb.map(([id,v])=>bar(esc(sname(id)),v,pb[0][1],scolor(id))).join('')}<div class="muted">مجموع: ${fmtDur(pb.reduce((a,b)=>a+b[1],0))}</div></div>`;
+ h+=`<div class="card"><div class="row between"><h2>📌 کارهای هفته</h2><span class="row"><button class="btn sm ghost" data-act="wkNav" data-v="-1">‹</button><button class="btn sm ghost" data-act="wkNav" data-v="0">این هفته</button><button class="btn sm ghost" data-act="wkNav" data-v="1">›</button></span></div><div class="muted">${fmtJs(ws)} تا ${fmtJs(addDays(ws,6))}</div>`;
+ for(let i=0;i<7;i++){const d=addDays(ws,i),L=S.tasks.filter(x=>x.date===d);h+=`<div style="margin-top:10px"><b ${d===t?'style="color:var(--primary)"':''}>${fmtJW(d)}</b>${L.length?L.map(taskRow).join(''):'<div class="muted" style="padding:2px 0">—</div>'}</div>`}
+ const def=ws<=t&&t<=addDays(ws,6)?t:ws;
+ h+=`<hr><form class="add" data-form="addTask" style="flex-wrap:wrap"><select name="date" style="width:auto">${Array.from({length:7},(_,i)=>{const d=addDays(ws,i);return`<option value="${d}" ${d===def?'selected':''}>${fmtJW(d)}</option>`}).join('')}</select><input name="title" placeholder="کار جدید…" required maxlength="120" style="min-width:140px"><select name="subject"><option value="">درس؟</option>${subjOpts('')}</select><button class="btn">+</button></form></div>`;
+ return h}
+
+function pageReport(){
+ const d=ui.repDate||today(),L=repsOn(d).sort((a,b)=>a.start.localeCompare(b.start)),first=S.subjects[0];
+ return`<div class="card"><h2>✍️ ثبت گزارش مطالعه</h2><form data-form="report">
+ <label>تاریخ</label>${jpick('d',d)}
+ <label>درس</label><select name="subject" data-subjsel required>${subjOpts('', 'انتخاب درس')}</select>
+ <label>نوع</label><select name="type">${typeOpts(first&&first.id,'study')}</select>
+ <div class="row" style="gap:10px;align-items:flex-start"><div class="grow"><label>ساعت شروع</label><input type="time" name="start" value="${tehran().time}" required></div><div class="grow"><label>مدت (دقیقه)</label><input type="number" name="min" min="1" max="720" value="60" required inputmode="numeric"></div></div>
+ <div class="row" style="margin-top:8px">${[30,45,60,90,120].map(v=>`<button type="button" class="btn sm ghost" data-act="setDur" data-v="${v}">${fa(v)}</button>`).join('')}</div>
+ <label>یادداشت (اختیاری: مبحث، تعداد تست…)</label><input name="note" maxlength="140">
+ <button class="btn" style="width:100%;margin-top:14px">ثبت گزارش</button></form></div>
+ <div class="card"><div class="row between"><h3>گزارش‌های ${fmtJW(d)}</h3><b>${fmtDur(minOn(d))}</b></div>${repList(L)}</div>`}
+const repList=L=>L.length?L.map(r=>`<div class="rep"><span class="muted" style="min-width:44px">${fa(r.start)}</span><span class="grow">${chip(r.subject)} <span class="muted">${TYPES[r.type]||''}${r.pomo?' 🍅':''}</span>${r.note?`<div class="muted">${esc(r.note)}</div>`:''}</span><b>${fmtDur(r.min)}</b><button class="x" data-act="repDel" data-id="${r.id}">✕</button></div>`).join(''):'<div class="empty">گزارشی ثبت نشده.</div>';
+
+function pageReports(){
+ const ws=addDays(wk(today()),ui.rw*7),we=addDays(ws,6),tot=minRange(ws,we),bd=breakdown(ws,we),pl=plannedBySubj(),ids=[...new Set([...Object.keys(pl),...bd.map(x=>x[0])])];
+ const act=Object.fromEntries(bd);let h=`<div class="card"><div class="row between"><h2>📒 گزارش هفتگی</h2><span class="row"><button class="btn sm ghost" data-act="rwNav" data-v="-1">‹</button><button class="btn sm ghost" data-act="rwNav" data-v="0">این هفته</button><button class="btn sm ghost" data-act="rwNav" data-v="1">›</button></span></div><div class="muted">${fmtJs(ws)} تا ${fmtJs(we)}</div>
+ <div class="grid" style="margin-top:10px"><div class="stat"><b>${fmtDur(tot)}</b><span>مجموع هفته</span></div><div class="stat"><b>${fa(S.reports.filter(r=>r.date>=ws&&r.date<=we).length)}</b><span>تعداد گزارش</span></div></div>
+ ${ids.length?`<h3 style="margin-top:14px">برنامه در برابر انجام‌شده</h3>${ids.map(id=>{const a=act[id]||0,p=pl[id]||0;return`<div class="hb"><div class="l"><span>${esc(sname(id))}</span><span class="muted">${fmtDur(a)}${p?' از '+fmtDur(p):''}</span></div><div class="t" style="--c:${scolor(id)}"><i style="width:${p?Math.min(100,a/p*100):(a?100:0)}%"></i></div></div>`}).join('')}`:''}</div>`;
+ for(let i=0;i<7;i++){const d=addDays(ws,i),L=repsOn(d).sort((a,b)=>a.start.localeCompare(b.start)),cl=S.closed[d];h+=`<div class="card"><div class="row between"><b>${fmtJW(d)}</b><span class="muted">${fmtDur(minOn(d))}</span></div>${repList(L)}${cl?`<div class="muted" style="margin-top:6px">🌙 پایان گزارش: ${['😞','😕','😐','🙂','🤩'][cl.rating-1]||''} ${esc(cl.note||'')}</div>`:''}</div>`}
+ return h}
+
+function dayDetail(d){const sl=slotsOfDay(dow(d)),tk=S.tasks.filter(x=>x.date===d),rp=repsOn(d),ex=S.exams.filter(x=>x.date===d),cl=S.closed[d];
+ return`<div class="card"><div class="row between"><h3>${fmtJW(d)} ${fa(toJ(d).jy)}</h3><button class="btn sm" data-act="repFor" data-d="${d}">+ گزارش</button></div>
+ ${ex.map(e=>`<div class="badge" style="display:block;margin:6px 0;padding:6px 10px">🎯 ${esc(e.title)}</div>`).join('')}
+ <b>برنامه</b>${sl.length?sl.map(({row,cell})=>`<div class="rep"><span class="muted">${fa(row.start)}–${fa(row.end)}</span><span class="grow">${chip(cell.subject)} <span class="muted">${TYPES[cell.type]||''}</span></span></div>`).join(''):'<div class="muted">—</div>'}
+ <hr><b>کارها</b>${tk.length?tk.map(taskRow).join(''):'<div class="muted">—</div>'}
+ <form class="add" data-form="addTask" data-date="${d}"><input name="title" placeholder="کار جدید برای این روز…" required><button class="btn">+</button></form>
+ <hr><div class="row between"><b>گزارش‌ها</b><b>${fmtDur(minOn(d))}</b></div>${repList(rp)}${cl?`<div class="muted">🌙 ${['😞','😕','😐','🙂','🤩'][cl.rating-1]||''} ${esc(cl.note||'')}</div>`:''}</div>`}
+function pageCal(){
+ const t=today(),tj=toJ(t);if(!ui.calY){ui.calY=tj.jy;ui.calM=tj.jm}if(!ui.calSel)ui.calSel=t;
+ const first=fromJ(ui.calY,ui.calM,1),len=jLen(ui.calY,ui.calM),off=dow(first),g=Math.max(1,S.settings.dailyGoal);
+ let c=DAYS.map(n=>`<div class="h">${n.slice(0,n.includes('‌')?undefined:3)}</div>`).join('');for(let i=0;i<off;i++)c+='<div></div>';
+ for(let d=1;d<=len;d++){const iso=fromJ(ui.calY,ui.calM,d),m=minOn(iso),hasEx=S.exams.some(e=>e.date===iso),ps=slotsOfDay(dow(iso)).length;
+  c+=`<div class="d ${iso===t?'today':''} ${iso===ui.calSel?'sel':''} ${dow(iso)===6?'fri':''} ${m>=g?'ok':''}" data-act="calSel" data-d="${iso}">${hasEx?'<i class="dot"></i>':''}${fa(d)}<small>${m?fmtMin(m):ps?fa(ps)+' برنامه':''}</small></div>`}
+ return`<div class="card"><div class="row between"><button class="btn sm ghost" data-act="calNav" data-v="-1">›</button><h2 style="margin:0">${MONTHS[ui.calM-1]} ${fa(ui.calY)}</h2><button class="btn sm ghost" data-act="calNav" data-v="1">‹</button></div><div class="cal" style="margin-top:10px">${c}</div><div class="row between" style="margin-top:10px"><span class="muted">🔴 آزمون/رویداد · ✓ رسیدن به هدف روز</span><button class="btn sm ghost" data-act="calNav" data-v="0">امروز</button></div></div>${dayDetail(ui.calSel)}`}
+const fmtMin=m=>fa(Math.floor(m/60))+':'+fa(p2(m%60));
+
+function pageExams(){
+ const t=today(),up=upcoming(),past=S.exams.filter(e=>e.date<t).sort((a,b)=>b.date.localeCompare(a.date)),sc=S.exams.filter(e=>pct(e)!=null).sort((a,b)=>a.date.localeCompare(b.date));
+ let chart='';if(sc.length>1){const W=320,H=130,n=sc.length,pts=sc.map((e,i)=>[20+i*(W-40)/(n-1),H-20-(pct(e)/100)*(H-40),pct(e)]);
+  chart=`<svg viewBox="0 0 ${W} ${H}" style="width:100%"><g stroke="var(--border)">${[0,50,100].map(v=>`<line x1="10" x2="${W-10}" y1="${H-20-v/100*(H-40)}" y2="${H-20-v/100*(H-40)}"/>`).join('')}</g><polyline fill="none" stroke="var(--primary)" stroke-width="3" points="${pts.map(p=>p[0]+','+p[1]).join(' ')}"/>${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="var(--primary)"/><text x="${p[0]}" y="${p[1]-8}" text-anchor="middle" font-size="9" style="fill:var(--text)">${fa(Math.round(p[2]))}</text>`).join('')}</svg>`}
+ const item=e=>{const p=pct(e);return`<div class="rep" data-act="examEdit" data-id="${e.id}" style="cursor:pointer"><span class="grow"><b>${esc(e.title)}</b> ${e.subject?chip(e.subject):''}${e.kind==='event'?' <span class="badge">رویداد</span>':''}<div class="muted">${fmtJ(e.date)}</div></span>${e.date>=t?`<span class="badge" style="font-size:13px">${cd(e.date)}</span>`:p!=null?`<b style="color:${p>=70?'var(--ok)':p>=50?'var(--warn)':'var(--bad)'}">${fa(Math.round(p))}٪</b>`:e.kind==='event'?'':'<span class="badge">ثبت نمره</span>'}</div>`};
+ return`<div class="card"><div class="row between"><h2>🎯 آزمون‌ها و شمارش معکوس</h2><button class="btn sm" data-act="examEdit" data-id="">+ جدید</button></div>
+ <h3 style="margin-top:12px">پیش‌رو</h3>${up.length?up.map(item).join(''):'<div class="empty">آزمون یا رویدادی در پیش نیست (مثلاً کنکور را اضافه کن).</div>'}</div>
+ ${chart?`<div class="card"><h3>📈 روند نمره‌ها (درصد)</h3>${chart}</div>`:''}
+ <div class="card"><h3>گذشته</h3>${past.length?past.map(item).join(''):'<div class="empty">هنوز آزمونی ثبت نشده.</div>'}</div>${examStats()}`}
+
+const C90=2*Math.PI*90;
+let tm=Object.assign({mode:'focus',running:false,endAt:0,left:null,subject:'',type:'study',cnt:0},cfg.timer||{});
+const tmDur=m=>(m==='focus'?S.settings.pomo.focus:m==='short'?S.settings.pomo.brk:S.settings.pomo.long)*60;
+const tmLeft=()=>tm.running?Math.max(0,Math.round((tm.endAt-Date.now())/1000)):(tm.left!=null?tm.left:tmDur(tm.mode));
+const tmSave=()=>{cfg.timer=tm;saveCfg()};
+function pageTimer(){
+ const L=tmLeft(),n=S.reports.filter(r=>r.date===today()&&r.pomo).length;
+ return`<div class="card tm"><h2>⏱️ تایمر پومودورو</h2>
+ <div class="tabs">${[['focus','تمرکز'],['short','استراحت کوتاه'],['long','استراحت بلند']].map(([k,l])=>`<button class="${tm.mode===k?'on':''}" data-act="tmMode" data-m="${k}">${l}</button>`).join('')}</div>
+ <svg class="ring" width="220" height="220" viewBox="0 0 220 220"><circle cx="110" cy="110" r="90" fill="none" stroke="var(--primary-soft)" stroke-width="12"/><circle id="tmring" cx="110" cy="110" r="90" fill="none" stroke="${tm.mode==='focus'?'var(--primary)':'var(--ok)'}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C90}" stroke-dashoffset="${C90*(1-L/tmDur(tm.mode))}" transform="rotate(-90 110 110)"/></svg>
+ <div class="time" id="tmtime">${fa(p2(Math.floor(L/60)))}:${fa(p2(L%60))}</div>
+ <form data-form="noop" style="text-align:right"><label>درس</label><select name="subject" data-subjsel data-tm>${subjOpts(tm.subject,'انتخاب درس')}</select><label>نوع</label><select name="type" data-tm>${typeOpts(tm.subject,tm.type)}</select></form>
+ <div class="row" style="justify-content:center;margin-top:16px"><button class="btn" data-act="tmToggle" style="min-width:130px">${tm.running?'⏸ توقف':'▶ شروع'}</button><button class="btn ghost" data-act="tmReset">↺ بازنشانی</button><button class="btn ghost" data-act="tmSkip">⏭ رد کردن</button></div>
+ <p class="muted">امروز ${fa(n)} پومودورو کامل کرده‌ای 🍅 · هر تمرکز کامل خودکار در گزارش‌ها ثبت می‌شود.</p></div>`}
+function tmUpdate(){const e=$('#tmtime');if(!e)return;const L=tmLeft();e.textContent=fa(p2(Math.floor(L/60)))+':'+fa(p2(L%60));$('#tmring').style.strokeDashoffset=C90*(1-L/tmDur(tm.mode))}
+function beep(){try{const A=new(window.AudioContext||window.webkitAudioContext)();[0,.25,.5].forEach(t=>{const o=A.createOscillator(),g=A.createGain();o.frequency.value=880;o.connect(g);g.connect(A.destination);g.gain.setValueAtTime(.2,A.currentTime+t);o.start(A.currentTime+t);o.stop(A.currentTime+t+.15)})}catch(e){}if(navigator.vibrate)navigator.vibrate([200,100,200])}
+function tmComplete(){const wasF=tm.mode==='focus';tm.running=false;tm.left=null;
+ if(wasF){const n=S.settings.pomo.focus,nw=tehran();let s=mins(nw.time)-n,d=nw.date;if(s<0){s+=1440;d=addDays(d,-1)}
+  S.reports.push({id:uid(),date:d,subject:tm.subject,type:tm.type||'study',start:hm(s),min:n,note:'پومودورو',pomo:1});save();
+  tm.cnt=(tm.cnt||0)+1;tm.mode=tm.cnt%S.settings.pomo.every===0?'long':'short';toast('🍅 یک پومودورو ثبت شد؛ وقت استراحت!')}
+ else{tm.mode='focus';toast('استراحت تمام شد. برگرد سر درس 💪')}
+ tmSave();beep();if(ui.page==='pomo'||ui.page==='home')render()}
+setInterval(()=>{if(tm.running&&Date.now()>=tm.endAt)tmComplete();else if(tm.running&&ui.page==='pomo')tmUpdate();
+ if(tm.running)document.title=fa(p2(Math.floor(tmLeft()/60)))+':'+fa(p2(tmLeft()%60))+' · برنامه‌ریز';else if(document.title!=='برنامه‌ریز درسی')document.title='برنامه‌ریز درسی'},500);
+
+function pageGoals(){return goalsCard()}
+
+function pageSettings(){
+ const p=S.profile,st=S.settings,po=st.pomo,sy=cfg.token&&cfg.gistId;
+ return`<div class="card"><h2>👤 پروفایل</h2><form data-form="profile"><div class="row">${logoHtml(p)}<div class="grow"><label style="margin-top:0">نام</label><input name="name" value="${esc(p.name)}" required maxlength="30"></div></div>
+ <label>پایه</label><select name="grade">${GRADES.map(g=>`<option ${g===p.grade?'selected':''}>${g}</option>`).join('')}</select>
+ <label>آرم</label><input type="hidden" name="logo" value="${esc(p.logo)}"><div class="emoji-grid">${['📚','🎓','🧠','🚀','⭐','🦉','🔥','🌱','✏️','🏆'].map(e=>`<button type="button" data-act="pickEmoji" class="${e===p.logo?'sel':''}">${e}</button>`).join('')}</div>
+ <label>یا عکس خودت</label><input type="file" accept="image/*" data-logo><button class="btn" style="margin-top:12px">ذخیره پروفایل</button></form></div>
+ <div class="card"><h2>🎨 ظاهر و هدف‌ها</h2><form data-form="settings"><div class="row"><div class="grow"><label>هدف روزانه (دقیقه)</label><input type="number" name="dailyGoal" min="10" max="900" value="${st.dailyGoal}"></div><div class="grow"><label>هدف هفتگی (ساعت)</label><input type="number" name="weeklyGoal" min="1" max="150" value="${st.weeklyGoal}"></div></div>
+ <div class="row"><div class="grow"><label>تمرکز (دقیقه)</label><input type="number" name="focus" min="1" max="120" value="${po.focus}"></div><div class="grow"><label>استراحت کوتاه</label><input type="number" name="brk" min="1" max="60" value="${po.brk}"></div><div class="grow"><label>استراحت بلند</label><input type="number" name="long" min="1" max="90" value="${po.long}"></div></div>
+ <div class="row" style="margin-top:12px"><button class="btn">ذخیره</button><button type="button" class="btn ghost" data-act="theme">🌓 تغییر تم روشن/تیره</button></div></form></div>
+ <div class="card"><h2>☁️ همگام‌سازی با گیت‌هاب</h2><p class="muted" style="margin-top:0">گیت‌هاب‌پیجز سرور ندارد؛ پس اطلاعاتت در مرورگر ذخیره می‌شود و با این گزینه، یک نسخه‌ی خصوصی (Gist) در حساب گیت‌هاب خودت ساخته و به‌روز می‌شود. برای ساخت توکن: GitHub ← Settings ← Developer settings ← Personal access tokens ← <b>Tokens (classic)</b> ← فقط دسترسی <b>gist</b> را تیک بزن.</p>
+ <form data-form="sync"><label>توکن گیت‌هاب</label><input type="password" name="token" value="${esc(cfg.token||'')}" placeholder="ghp_…" autocomplete="off"><label>شناسه Gist (برای دستگاه جدید وارد کن؛ در غیر این صورت خودکار ساخته می‌شود)</label><input name="gistId" value="${esc(cfg.gistId||'')}" dir="ltr" autocomplete="off">
+ <label style="display:flex;gap:8px;align-items:center;color:var(--text)"><input type="checkbox" name="auto" ${cfg.auto!==false?'checked':''}> همگام‌سازی خودکار پس از هر تغییر</label>
+ <div class="row" style="margin-top:12px"><button class="btn">ذخیره و اتصال</button>${sy?`<button type="button" class="btn ghost" data-act="syncPush">⬆ ارسال</button><button type="button" class="btn ghost" data-act="syncPull">⬇ دریافت</button><button type="button" class="btn danger" data-act="syncOff">قطع اتصال</button>`:''}</div></form>
+ <div class="muted" style="margin-top:8px">وضعیت: ${sy?'متصل ✅'+(cfg.lastSync?' · آخرین همگام‌سازی '+fmtJs(tehranOf(cfg.lastSync)):''):'متصل نیست'}</div></div>
+ <div class="card"><h2>📚 درس‌ها</h2>${['spec','gen'].map(g=>`<b>${g==='spec'?'تخصصی':'غیرتخصصی'}</b><div class="row" style="margin:6px 0 12px">${S.subjects.filter(s=>s.group===g).map(s=>`<span class="chip" style="--c:${s.color};padding:4px 12px">${esc(s.name)}${s.online?' 🎥':''} <button class="x" data-act="subjDel" data-id="${s.id}">✕</button></span>`).join('')}</div>`).join('')}
+ <p class="muted">🎥 یعنی گزینه‌ی «کلاس آنلاین» برای آن درس فعال است.</p>
+ <form class="add" data-form="addSubj" style="flex-wrap:wrap"><input name="name" placeholder="درس جدید" required maxlength="20"><select name="group" style="width:auto"><option value="spec">تخصصی</option><option value="gen">غیرتخصصی</option></select><label style="display:flex;gap:6px;align-items:center;margin:0;color:var(--text)"><input type="checkbox" name="online"> کلاس آنلاین</label><button class="btn">+</button></form></div>
+ <div class="card"><h2>💾 پشتیبان‌گیری</h2><div class="row"><button class="btn ghost" data-act="export">⬇ دریافت فایل پشتیبان</button><label class="btn ghost" style="margin:0;color:var(--primary);cursor:pointer">⬆ بازیابی از فایل<input type="file" accept=".json,application/json" data-import hidden></label><button class="btn danger" data-act="reset">پاک کردن همه‌چیز</button></div></div>`}
+const tehranOf=ms=>{const f=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tehran'}).format(new Date(ms));return f};
+
+const pages={home:pageHome,dash:pageDash,plan:pagePlan,report:pageReport,reports:pageReports,calendar:pageCal,exams:pageExams,pomo:pageTimer,goals:pageGoals,settings:pageSettings};
+
+function onboard(){return`<div class="onb"><div class="card" style="text-align:center"><div style="font-size:54px">📚</div><h1>به برنامه‌ریز درسی خوش آمدی</h1><p class="muted">قبل از شروع، چند چیز را بگو:</p>
+ <form data-form="onboard" style="text-align:right"><label>آرم (یک شکل انتخاب کن یا عکس بگذار)</label><input type="hidden" name="logo" value="📚"><div class="emoji-grid">${['📚','🎓','🧠','🚀','⭐','🦉','🔥','🌱','✏️','🏆'].map((e,i)=>`<button type="button" data-act="pickEmoji" class="${i===0?'sel':''}">${e}</button>`).join('')}</div><input type="file" accept="image/*" data-logo style="margin-top:8px">
+ <label>نام</label><input name="name" maxlength="30" placeholder="مثلاً علی" autocomplete="off">
+ <label>پایه</label><select name="grade">${GRADES.map(g=>`<option>${g}</option>`).join('')}</select>
+ <button class="btn" style="width:100%;margin-top:18px">شروع کنیم 🚀</button></form></div></div>`}
+
+/* ---------- رندر ---------- */
+function applyTheme(){const th=cfg.theme||(matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=th}
+function render(){
+ applyTheme();const app=$('#app');
+ if(!S.profile){app.innerHTML=onboard();return}
+ const p=S.profile;
+ app.innerHTML=`<header class="top"><button class="ic" data-act="drawer" aria-label="منو">☰</button><div class="brand">${logoHtml(p)}<div><b>${esc(p.name)}</b><small>پایه ${esc(p.grade)}</small></div></div><div class="sp"></div><button class="ic" id="syncic" data-act="goto" data-p="settings" title="همگام‌سازی">${SYI[syncState]}</button><button class="ic" data-act="theme" aria-label="تم">🌓</button></header>
+ <div class="ov ${ui.drawer?'open':''}" data-act="drawer"></div><aside class="drawer ${ui.drawer?'open':''}"><div class="row" style="padding:6px 8px 14px">${logoHtml(p)}<div><b>داشبورد</b><div class="muted">همه‌ی بخش‌ها از اینجا</div></div></div>${NAV.map(([k,i,l])=>`<button class="nav ${ui.page===k?'on':''}" data-act="goto" data-p="${k}"><span>${i}</span><span>${l}</span></button>`).join('')}${isStandalone()?'':`<button class="nav" data-act="installApp" style="margin-top:8px;border:1px dashed var(--primary)"><span>📲</span><span>${deferredPrompt?'نصب برنامه (بدون نوار آدرس)':'نصب برنامه روی گوشی'}</span></button>`}</aside>
+ <main class="wrap">${pages[ui.page]()}</main>${['report','pomo'].includes(ui.page)?'':'<button class="fab" data-act="goto" data-p="report" aria-label="ثبت گزارش">✍️</button>'}`;
+}
+function route(){let h='';try{h=location.hash.replace('#/','')}catch(e){}ui.page=h||'home';if(!pages[ui.page])ui.page='home';ui.drawer=false;render();window.scrollTo(0,0)}
+const go=p=>{ui.page=p;ui.drawer=false;try{history.pushState(null,'','#/'+p)}catch(e){}render();window.scrollTo(0,0)};
+window.addEventListener('hashchange',route);window.addEventListener('popstate',route);
+
+/* ---------- کنش‌ها ---------- */
+const A={
+ installApp(){if(deferredPrompt){const d=deferredPrompt;deferredPrompt=null;d.prompt();if(d.userChoice)d.userChoice.finally(()=>render())}else openModal(`<h3>📲 نصب برنامه</h3><p><b>اندروید (کروم):</b> منوی ⋮ بالای کروم ← «Install app» یا «Add to Home screen».</p><p><b>آیفون (Safari):</b> دکمه Share ← «Add to Home Screen».</p><p class="muted">نصب فقط وقتی کار می‌کند که سایت از آدرس https (مثل گیت‌هاب‌پیجز) باز شده باشد، نه از داخل پیش‌نمایش یا فایل ذخیره‌شده. اگر تازه سایت را باز کرده‌ای، چند ثانیه صبر کن و دوباره امتحان کن.</p><button class="btn ghost" data-act="closeModal">بستن</button>`)},
+ drawer(){ui.drawer=!ui.drawer;render()},goto(t){go(t.dataset.p)},
+ theme(){const cur=document.documentElement.dataset.theme;cfg.theme=cur==='dark'?'light':'dark';saveCfg();render()},
+ ovClose(t,e){if(e.target===t)closeModal()},closeModal,
+ pickEmoji(t){const f=t.closest('form');f.querySelector('[name=logo]').value=t.textContent;f.querySelectorAll('.emoji-grid button').forEach(b=>b.classList.toggle('sel',b===t))},
+ taskToggle(t){const x=S.tasks.find(k=>k.id===t.dataset.id);if(x){x.done=!x.done;save();render()}},
+ taskDel(t){S.tasks=S.tasks.filter(k=>k.id!==t.dataset.id);save();render()},
+ slotToggle(t){const k=t.dataset.k;S.slotDone[k]=!S.slotDone[k];if(!S.slotDone[k])delete S.slotDone[k];save();render()},
+ setDur(t){const i=t.closest('form').querySelector('[name=min]');i.value=t.dataset.v},
+ repDel(t){S.reports=S.reports.filter(r=>r.id!==t.dataset.id);save();render()},
+ repFor(t){ui.repDate=t.dataset.d;go('report')},
+ wkNav(t){const v=+t.dataset.v;ui.wk=v===0?0:ui.wk+v;render()},rwNav(t){const v=+t.dataset.v;ui.rw=v===0?0:ui.rw+v;render()},
+ dashP(t){ui.dashP=t.dataset.p;render()},
+ calNav(t){const v=+t.dataset.v;if(v===0){const j=toJ(today());ui.calY=j.jy;ui.calM=j.jm;ui.calSel=today()}else{ui.calM+=v;if(ui.calM>12){ui.calM=1;ui.calY++}if(ui.calM<1){ui.calM=12;ui.calY--}}render()},
+ calSel(t){ui.calSel=t.dataset.d;render();const e=document.querySelector('.cal');if(e)e.scrollIntoView({block:'start'})},
+ rowEdit(t){const id=t.dataset.id,r=S.plan.rows.find(x=>x.id===id);if(!r)return;
+  openModal(`<h3>ساعت این ستون</h3><form data-form="row" data-id="${id}"><div class="row"><div class="grow"><label>از</label><input type="time" name="start" value="${r.start}" required></div><div class="grow"><label>تا</label><input type="time" name="end" value="${r.end}" required></div></div><div class="row" style="margin-top:14px"><button class="btn">ذخیره</button><button type="button" class="btn ghost" data-act="closeModal">بستن</button></div></form>`)},
+ timesEdit(){openModal(`<h3>ساعت‌های ستون‌ها</h3><form data-form="times">${S.plan.rows.map((r,i)=>`<div class="row" style="margin-top:8px;flex-wrap:nowrap"><b style="width:22px">${fa(i+1)}</b><input type="time" name="s_${r.id}" value="${r.start}" required style="flex:1"><span>تا</span><input type="time" name="e_${r.id}" value="${r.end}" required style="flex:1"></div>`).join('')}<div class="row" style="margin-top:14px"><button class="btn">ذخیره</button><button type="button" class="btn ghost" data-act="closeModal">بستن</button></div></form>`)},
+ cellEdit(t){const r=S.plan.rows.find(x=>x.id===t.dataset.r),d=+t.dataset.d,c=S.plan.cells[r.id+'|'+d]||{},sid=c.subject||(S.subjects[0]||{}).id;
+  openModal(`<h3>${DAYS[d]} · ${fa(r.start)} – ${fa(r.end)}</h3><form data-form="cell" data-r="${r.id}"><label>درس</label><select name="subject" data-subjsel>${subjOpts(sid)}</select><label>نوع</label><select name="type">${typeOpts(sid,c.type||'study')}</select><label>یادداشت (اختیاری)</label><input name="note" value="${esc(c.note||'')}" maxlength="60">
+  <label>اعمال برای روزهای</label><div class="row" style="gap:10px">${DAYS.map((n,i)=>`<label style="display:flex;gap:4px;align-items:center;margin:0;color:var(--text)"><input type="checkbox" name="days" value="${i}" ${i===d?'checked':''}>${n}</label>`).join('')}</div>
+  <div class="row" style="margin-top:14px"><button class="btn">ذخیره</button>${c.subject?`<button type="button" class="btn danger" data-act="cellDel" data-k="${r.id}|${d}">حذف</button>`:''}<button type="button" class="btn ghost" data-act="closeModal">بستن</button></div></form>`)},
+ cellDel(t){delete S.plan.cells[t.dataset.k];save();closeModal();render()},
+ closeDay(){const d=today(),c=S.closed[d]||{rating:4,note:''};
+  openModal(`<h3>🌙 پایان گزارش ${fmtJW(d)}</h3><p class="muted" style="margin-top:0">امروز ${fmtDur(minOn(d))} مطالعه کردی.</p><form data-form="closeDay"><label>امروز چطور بود؟</label><div class="emo">${['😞','😕','😐','🙂','🤩'].map((e,i)=>`<label><input type="radio" name="rating" value="${i+1}" ${c.rating===i+1?'checked':''}>${e}</label>`).join('')}</div><label>یادداشت پایان روز</label><textarea name="note" rows="3" maxlength="300" placeholder="چه چیزی خوب پیش رفت؟ فردا چه کار کنم؟">${esc(c.note)}</textarea><div class="row" style="margin-top:14px"><button class="btn">ثبت پایان گزارش</button><button type="button" class="btn ghost" data-act="closeModal">بستن</button></div></form>`)},
+ examEdit(t){const id=t.dataset.id,e=S.exams.find(x=>x.id===id)||{kind:'exam',max:20};
+  openModal(`<h3>${id?'ویرایش':'آزمون / رویداد جدید'}</h3><form data-form="exam" data-id="${id}"><label>عنوان</label><input name="title" value="${esc(e.title||'')}" required maxlength="60" placeholder="مثلاً آزمون فیزیک / کنکور"><div class="row"><div class="grow"><label>نوع</label><select name="kind"><option value="exam" ${e.kind==='exam'?'selected':''}>آزمون</option><option value="event" ${e.kind==='event'?'selected':''}>رویداد (مثل کنکور)</option></select></div><div class="grow"><label>درس</label><select name="subject">${subjOpts(e.subject||'','عمومی')}</select></div></div><label>تاریخ</label>${jpick('d',e.date)}<div class="row"><div class="grow"><label>نمره (بعد از آزمون)</label><input type="number" step="any" name="score" value="${e.score==null?'':e.score}"></div><div class="grow"><label>از</label><input type="number" step="any" name="max" value="${e.max||20}"></div></div>
+  <div class="row" style="margin-top:14px"><button class="btn">ذخیره</button>${id?`<button type="button" class="btn danger" data-act="examDel" data-id="${id}">حذف</button>`:''}<button type="button" class="btn ghost" data-act="closeModal">بستن</button></div></form>`)},
+ examDel(t){S.exams=S.exams.filter(x=>x.id!==t.dataset.id);save();closeModal();render()},
+ goalEdit(t){const id=t.dataset.id,g=S.goals.find(x=>x.id===id)||{kind:'هفتگی',progress:0,due:addDays(today(),7)};
+  openModal(`<h3>${id?'ویرایش هدف':'هدف جدید'}</h3><form data-form="goal" data-id="${id}"><label>هدف</label><input name="title" value="${esc(g.title||'')}" required maxlength="100" placeholder="مثلاً تمام کردن فصل ۳ فیزیک"><label>نوع</label><select name="kind">${['هفتگی','ماهانه','فصلی','سالانه'].map(k=>`<option ${k===g.kind?'selected':''}>${k}</option>`).join('')}</select><label>موعد</label>${jpick('d',g.due)}<label>پیشرفت: <b id="gp">${fa(g.progress)}</b>٪</label><input type="range" name="progress" min="0" max="100" step="5" value="${g.progress}" oninput="document.getElementById('gp').textContent=this.value.replace(/\\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])">
+  <div class="row" style="margin-top:14px"><button class="btn">ذخیره</button>${id?`<button type="button" class="btn danger" data-act="goalDel" data-id="${id}">حذف</button>`:''}<button type="button" class="btn ghost" data-act="closeModal">بستن</button></div></form>`)},
+ goalDel(t){S.goals=S.goals.filter(x=>x.id!==t.dataset.id);save();closeModal();render()},
+ subjDel(t){const id=t.dataset.id;ask('این درس حذف شود؟ گزارش‌های قبلی می‌مانند.',()=>{S.subjects=S.subjects.filter(s=>s.id!==id);save();render()})},
+ tmMode(t){if(tm.running)return toast('اول تایمر را متوقف کن');tm.mode=t.dataset.m;tm.left=null;tmSave();render()},
+ tmToggle(){if(tm.running){tm.left=tmLeft();tm.running=false}else{if(tm.mode==='focus'&&!tm.subject)return toast('اول درس را انتخاب کن');tm.endAt=Date.now()+tmLeft()*1000;tm.running=true}tmSave();render()},
+ tmReset(){tm.running=false;tm.left=null;tmSave();render()},tmSkip(){tm.running=false;tm.left=null;tm.mode=tm.mode==='focus'?'short':'focus';tmSave();render()},
+ async syncPush(){toast('در حال ارسال…');toast(await push()?'ارسال شد ✓':'خطا: توکن یا اینترنت را بررسی کن');render()},
+ syncPull(){ask('اطلاعات این دستگاه با نسخه‌ی گیت‌هاب جایگزین شود؟',async()=>{try{setSync('busy');S=await pull();LS.set(SK,JSON.stringify(S));setSync('ok');toast('دریافت شد ✓');render()}catch(e){setSync('err');toast('خطا در دریافت: توکن/شناسه را بررسی کن')}})},
+ askYes(){const f=askCb;askCb=null;closeModal();if(f)f()},
+ syncOff(){delete cfg.token;delete cfg.gistId;saveCfg();setSync('off');render()},
+ export(){const b=new Blob([JSON.stringify(S,null,1)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`study-planner-${today()}.json`;a.click()},
+ reset(){ask('همه‌ی اطلاعات برای همیشه پاک شود؟',()=>{S=normalize(null);save();go('home')})}
+};
+document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(!t)return;const f=A[t.dataset.act];if(f)f(t,e)});
+
+const F={
+ noop(){},
+ onboard(f,fd){const nm=fd.get('name').trim();if(!nm)return toast('نام را وارد کن');S.profile={name:nm,grade:fd.get('grade'),logo:fd.get('logo')};save();toast('خوش آمدی '+S.profile.name+' 🌟');go('home')},
+ profile(f,fd){S.profile={name:fd.get('name').trim(),grade:fd.get('grade'),logo:fd.get('logo')};save();toast('ذخیره شد ✓');render()},
+ settings(f,fd){const n=k=>Math.max(1,+fd.get(k)||1);S.settings.dailyGoal=n('dailyGoal');S.settings.weeklyGoal=n('weeklyGoal');Object.assign(S.settings.pomo,{focus:n('focus'),brk:n('brk'),long:n('long')});tm.left=null;save();toast('ذخیره شد ✓');render()},
+ addTask(f,fd){const date=fd.get('date')||f.dataset.date;S.tasks.push({id:uid(),date,title:fd.get('title').trim(),subject:fd.get('subject')||'',done:false});save();render()},
+ report(f,fd){const date=readJ(fd,'d');S.reports.push({id:uid(),date,subject:fd.get('subject'),type:fd.get('type'),start:fd.get('start'),min:Math.max(1,+fd.get('min')||1),note:fd.get('note').trim()});ui.repDate=date;save();toast('گزارش ثبت شد ✓');render()},
+ row(f,fd){const id=f.dataset.id,s=fd.get('start'),e=fd.get('end');if(mins(e)<=mins(s))return toast('ساعت پایان باید بعد از شروع باشد');const r=S.plan.rows.find(x=>x.id===id);if(r){r.start=s;r.end=e}save();closeModal();render()},
+ times(f,fd){for(const r of S.plan.rows){if(mins(fd.get('e_'+r.id))<=mins(fd.get('s_'+r.id)))return toast('ساعت پایانِ هر ستون باید بعد از شروعش باشد')}S.plan.rows.forEach(r=>{r.start=fd.get('s_'+r.id);r.end=fd.get('e_'+r.id)});save();closeModal();render()},
+ cell(f,fd){const days=fd.getAll('days');if(!days.length)return toast('حداقل یک روز را انتخاب کن');days.forEach(d=>{S.plan.cells[f.dataset.r+'|'+d]={subject:fd.get('subject'),type:fd.get('type'),note:fd.get('note').trim()}});save();closeModal();render()},
+ closeDay(f,fd){S.closed[today()]={rating:+fd.get('rating')||4,note:fd.get('note').trim()};save();closeModal();toast('پایان گزارش امروز ثبت شد 🌙');render()},
+ exam(f,fd){const id=f.dataset.id,o={title:fd.get('title').trim(),kind:fd.get('kind'),subject:fd.get('subject'),date:readJ(fd,'d'),score:fd.get('score')===''?'':+fd.get('score'),max:+fd.get('max')||20};if(id)Object.assign(S.exams.find(x=>x.id===id),o);else S.exams.push({id:uid(),...o});save();closeModal();render()},
+ goal(f,fd){const id=f.dataset.id,o={title:fd.get('title').trim(),kind:fd.get('kind'),due:readJ(fd,'d'),progress:+fd.get('progress')};if(id)Object.assign(S.goals.find(x=>x.id===id),o);else S.goals.push({id:uid(),...o});save();closeModal();render()},
+ addSubj(f,fd){S.subjects.push({id:'s'+uid(),name:fd.get('name').trim(),group:fd.get('group'),online:!!fd.get('online'),color:PAL[S.subjects.length%PAL.length]});save();render()},
+ async sync(f,fd){cfg.token=fd.get('token').trim();cfg.gistId=fd.get('gistId').trim();cfg.auto=!!fd.get('auto');saveCfg();if(!cfg.token){setSync('off');return render()}
+  try{if(cfg.gistId){const r=await pull();if(r.updatedAt>S.updatedAt){ask('در گیت‌هاب اطلاعات جدیدتری هست. جایگزین شود؟',()=>{S=r;LS.set(SK,JSON.stringify(S));render()})}else await push()}else await push();toast('متصل شد ✓');setSync('ok')}catch(e){setSync('err');toast('اتصال ناموفق: توکن/شناسه یا اینترنت را بررسی کن')}render()}
+};
+function runForm(f){const h=F[f.dataset.form];if(h)h(f,new FormData(f))}
+document.addEventListener('submit',e=>{const f=e.target.closest('form[data-form]');if(!f)return;e.preventDefault();runForm(f)});
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.dataset.act||(b.type&&b.type!=='submit'))return;const f=b.closest('form[data-form]');if(!f)return;e.preventDefault();if(f.checkValidity&&!f.checkValidity()){if(f.reportValidity)f.reportValidity();return}runForm(f)},true);
+document.addEventListener('keydown',e=>{if(e.key!=='Enter'||e.target.tagName!=='INPUT'||e.target.type==='file')return;const f=e.target.closest('form[data-form]');if(!f)return;e.preventDefault();const b=f.querySelector('button:not([type=button])');if(b)b.click()});
+document.addEventListener('change',e=>{const t=e.target;
+ if(t.matches('[data-subjsel]')&&t.form){const ts=t.form.querySelector('[name=type]');if(ts)ts.innerHTML=typeOpts(t.value,ts.value)}
+ if(t.matches('[data-tm]')){tm[t.name]=t.value;if(t.name==='subject'){tm.type=t.form.querySelector('[name=type]').value}tmSave()}
+ if(t.matches('[data-logo]')&&t.files[0]){const fr=new FileReader();fr.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),s=128;c.width=c.height=s;const m=Math.min(im.width,im.height);c.getContext('2d').drawImage(im,(im.width-m)/2,(im.height-m)/2,m,m,0,0,s,s);const f=t.closest('form');f.querySelector('[name=logo]').value=c.toDataURL('image/jpeg',.8);f.querySelectorAll('.emoji-grid button').forEach(b=>b.classList.remove('sel'));toast('عکس انتخاب شد ✓')};im.src=fr.result};fr.readAsDataURL(t.files[0])}
+ if(t.matches('[data-import]')&&t.files[0]){const fr=new FileReader();fr.onload=()=>{try{const o=normalize(JSON.parse(fr.result));ask('اطلاعات فعلی با فایل جایگزین شود؟',()=>{S=o;save();toast('بازیابی شد ✓');render()})}catch(e){toast('فایل معتبر نیست')}};fr.readAsText(t.files[0])}
+});
+
+/* ---------- شروع ---------- */
+let lastDay=today();
+setInterval(()=>{const d=today();if(d!==lastDay){lastDay=d;render()}},30000);
+route();
+if(tm.running&&Date.now()>=tm.endAt)tmComplete();
+syncTime().then(()=>{lastDay=today()});
+initSync();
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)){try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}}
+</script>
+</body>
+</html>
